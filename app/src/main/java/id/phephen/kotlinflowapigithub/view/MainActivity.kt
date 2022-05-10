@@ -39,7 +39,18 @@ class MainActivity : AppCompatActivity() {
                     Status.LOADING -> {
                         binding.progressBar.isVisible = true
                     }
-
+                    Status.SUCCESS -> {
+                        binding.progressBar.isVisible = false
+                        it.data?.let { user ->
+                            binding.tvName.text = user.login
+                            binding.tvEmail.text = user.login
+                            binding.tvRepos.text = user.url
+                        }
+                    }
+                    else -> {
+                        binding.progressBar.isVisible = false
+                        Toast.makeText(this@MainActivity, "${it.message}", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }
